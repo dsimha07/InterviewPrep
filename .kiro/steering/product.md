@@ -28,13 +28,17 @@ improvement over time.
 4.⁠ ⁠Results — each answer is scored and given feedback; an overall summary is generated.
 
 ## Key Features
-1.⁠ ⁠Question bank — curated interview questions by category 
-   (HR, technical, behavioural)
-2.⁠ ⁠Answer submission — user types their answer
-3.⁠ ⁠AI feedback — Ollama (Llama 3.2) evaluation of the answer
-4.⁠ ⁠Progress tracking — history of attempted questions and scores
-5.⁠ ⁠Mock interview mode — randomised set of 3 questions per session, 
-   no time limit
+1. Auth — basic login and signup
+2. Profile info — user sets up their name and role
+3. Mock interview session — 3 randomised questions shown 
+   one at a time, user types answer and moves to next
+4. AI feedback — Ollama (Llama 3.2) evaluates each answer
+5. Results page — qualitative analysis with score out of 10
+6. Progress tracking — history of past sessions and scores
+
+## User Flow
+Login → Profile Info → Start Interview → 
+Question 1 → Question 2 → Question 3 → Results Page
 
 
 ## Problem We're Solving
@@ -50,6 +54,7 @@ AI feedback loop.
 •⁠  ⁠Auth: Basic authentication (simplest available)
 
 ## Out of Scope (for this version)
+- No question browsing page
 •⁠  ⁠No complex authentication — basic login only
 •⁠  ⁠No mobile app — web only
 •⁠  ⁠No real-time video or audio interviews
