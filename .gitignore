@@ -1,0 +1,17 @@
+# Dependencies
+backend/node_modules/
+frontend/node_modules/
+
+
+
+.env
+*.sqlite
+*.sqlite3
+*.db
+
+# Build output
+dist/
+build/
+
+# OS
+.DS_Store
