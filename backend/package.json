@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --runInBand --forceExit",
     "start": "node index.js",
     "dev": "nodemon index.js",
     "seed": "node seed.js"
@@ -13,11 +13,16 @@
   "license": "ISC",
   "description": "",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "better-sqlite3": "^12.10.0",
+    "cors": "^2.8.6",
     "dotenv": "^17.4.2",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "jsonwebtoken": "^9.0.3"
   },
   "devDependencies": {
+    "fast-check": "^4.8.0",
+    "jest": "^30.4.2",
     "nodemon": "^3.1.14"
   }
 }

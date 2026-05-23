@@ -55,7 +55,7 @@ AI feedback loop.
 
 ## Out of Scope (for this version)
 - No question browsing page
-•⁠  ⁠No complex authentication — basic login only
+•⁠  ⁠No complex authentication — basic login onlyp
 •⁠  ⁠No mobile app — web only
 •⁠  ⁠No real-time video or audio interviews
 •⁠  ⁠No cloud deployment — runs locally only

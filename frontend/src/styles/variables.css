@@ -1,0 +1,19 @@
+/*
+ * variables.css
+ * Brand color tokens for the Interview Prep app.
+ * All components must reference these custom properties — never use raw hex values directly.
+ */
+
+:root {
+  --color-primary:        #002856;  /* Midnight Blue */
+  --color-secondary:      #0598CE;  /* Dodger Blue */
+  --color-accent-yellow:  #FFC000;
+  --color-accent-orange:  #F27D2E;
+  --color-blue-mid:       #1E4278;
+  --color-gray:           #555555;
+  --color-bg:             #F7F7F7;  /* Pale White */
+  --color-bg-light-blue:  #E3EDFD;
+  --color-text:           #1e1111ff;
+  --color-text-gray:      #747474;
+  --color-text-mid-gray:  #B3B3B3;
+}
