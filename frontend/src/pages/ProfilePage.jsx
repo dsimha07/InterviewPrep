@@ -46,6 +46,15 @@ function ProfilePage() {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
+  /**
+   * Calls logout() from AuthContext to clear the token and auth state,
+   * then navigates the user to /login.
+   */
+  function handleLogout() {
+    logout();
+    navigate('/login', { replace: true });
+  }
+
   useEffect(() => {
     const rawToken = localStorage.getItem(TOKEN_KEY);
 
@@ -83,6 +92,15 @@ function ProfilePage() {
         )}
 
         <p style={styles.body}>Profile setup coming soon</p>
+
+        {/* Logout button — clears auth state and redirects to /login */}
+        <button
+          style={styles.logoutButton}
+          onClick={handleLogout}
+          type="button"
+        >
+          Log Out
+        </button>
       </div>
     </main>
   );
@@ -122,6 +140,19 @@ const styles = {
     color: 'var(--color-text-gray)',
     fontSize: '1rem',
     margin: 0,
+  },
+  logoutButton: {
+    marginTop: '1.5rem',
+    padding: '0.6rem 1.4rem',
+    backgroundColor: 'var(--color-primary)',
+    color: '#ffffff',
+    border: 'none',
+    borderRadius: '6px',
+    fontSize: '1rem',
+    fontWeight: '600',
+    cursor: 'pointer',
+    display: 'block',
+    width: '100%',
   },
 };
 
