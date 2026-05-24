@@ -4,9 +4,9 @@
  * Renders the signup form for the Interview Prep app.
  * Validates inputs client-side before calling the API, displays inline
  * errors, disables the submit button during in-flight requests, and
- * redirects to /profile on success.
+ * redirects to /profile-info on success.
  *
- * On API success: stores the JWT via AuthContext.login() and navigates to /profile.
+ * On API success: stores the JWT via AuthContext.login() and navigates to /profile-info.
  * On API error: displays error.message, falling back to a generic message.
  *
  * All colors reference variables.css tokens — no raw hex values.
@@ -58,7 +58,7 @@ function SignupPage() {
     try {
       const { token } = await authService.signup({ username, password });
       login(token);
-      navigate('/profile');
+      navigate('/profile-info');
     } catch (err) {
       const message = err && err.message ? err.message : FALLBACK_ERROR;
       setError(message);

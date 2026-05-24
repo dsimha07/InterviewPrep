@@ -6,29 +6,31 @@
  * purely routing configuration.
  *
  * Routes:
- *   /          → redirect to /login
- *   /login     → LoginPage
- *   /signup    → SignupPage
- *   /profile   → ProfilePage  (protected — requires authentication)
+ *   /              → redirect to /login
+ *   /login         → LoginPage
+ *   /signup        → SignupPage
+ *   /profile-info  → ProfilePage   (protected — requires authentication)
+ *   /interview     → InterviewPage (protected — requires authentication)
  *
  * <BrowserRouter> and <AuthProvider> are provided by main.jsx so
  * that this component stays focused on routing only.
  *
- * Requirements: 6.1, 6.2
+ * Requirements: 2.4, 7.2, 7.3
  *
- * @author basic-auth spec
+ * @author profile-info spec
  */
 
 import { Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import ProfilePage from './pages/ProfilePage';
+import InterviewPage from './pages/InterviewPage';
 import ProtectedRoute from './components/ProtectedRoute';
 
 /**
  * App — defines the application route tree.
  *
- * ProtectedRoute wraps the /profile route and redirects
+ * ProtectedRoute wraps the protected routes and redirects
  * unauthenticated users to /login via React Router's <Outlet>.
  */
 function App() {
@@ -43,7 +45,8 @@ function App() {
 
       {/* Protected routes — ProtectedRoute guards the nested <Outlet> */}
       <Route element={<ProtectedRoute />}>
-        <Route path="/profile" element={<ProfilePage />} />
+        <Route path="/profile-info" element={<ProfilePage />} />
+        <Route path="/interview" element={<InterviewPage />} />
       </Route>
     </Routes>
   );

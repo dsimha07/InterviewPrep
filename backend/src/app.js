@@ -13,6 +13,7 @@
 const express = require('express');
 const cors = require('cors');
 const authRouter = require('./routes/auth');
+const profileRouter = require('./routes/profile');
 const errorHandler = require('./middleware/errorHandler');
 
 // Startup guard — must run before any routes are mounted so the process
@@ -31,6 +32,7 @@ app.use(express.json());
 
 // --- Routes ---
 app.use('/api/auth', authRouter);
+app.use('/api/profile', profileRouter);
 
 // --- Global error handler (must be last) ---
 app.use(errorHandler);

@@ -4,9 +4,13 @@
  * Renders the login form for the Interview Prep app.
  * Validates inputs client-side before calling the API, displays inline
  * errors, disables the submit button during in-flight requests, and
- * redirects to /profile on success.
+ * routes to the correct page after login based on the user's profile status.
  *
- * On API success: stores the JWT via AuthContext.login() and navigates to /profile.
+ * Post-login routing:
+ *   - Profile_API returns 200 (profile exists) → navigate('/interview')
+ *   - Profile_API returns 404 (no profile yet)  → navigate('/profile-info')
+ *   - Profile_API returns any other error        → navigate('/profile-info') (safe fallback)
+ *
  * On API error: displays error.message, falling back to a generic message.
  *
  * All colors reference variables.css tokens — no raw hex values.
@@ -18,6 +22,7 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import * as authService from '../services/authService';
+import { getProfile } from '../services/profileService';
 import '../styles/variables.css';
 
 /** Fallback error message when the API error has no message body. */
@@ -39,7 +44,11 @@ function LoginPage() {
   /**
    * Handles form submission.
    * Validates that both fields are non-empty and non-whitespace-only.
-   * On valid input, calls the login API and handles success/error.
+   * On valid input, calls the login API, then checks the user's profile
+   * to determine the correct post-login destination:
+   *   - 200 (profile exists) → /interview
+   *   - 404 (no profile)     → /profile-info
+   *   - other error          → /profile-info (safe fallback per Requirement 2.6)
    *
    * @param {React.FormEvent<HTMLFormElement>} event
    */
@@ -58,7 +67,24 @@ function LoginPage() {
     try {
       const { token } = await authService.login({ username, password });
       login(token);
-      navigate('/profile');
+
+      // Check whether the user already has a profile to decide where to route them.
+      try {
+        await getProfile(token);
+        // Profile exists (200) — go straight to the interview page.
+        navigate('/interview');
+      } catch (profileErr) {
+        if (profileErr && profileErr.status === 404) {
+          // No profile yet — send the user to the profile setup form.
+          navigate('/profile-info');
+        } else {
+          // Unexpected error from the Profile_API — safe fallback to profile setup.
+          console.warn(
+            `[${new Date().toISOString()}] [warning] [LoginPage] Profile check failed with status ${profileErr?.status ?? 'unknown'} — falling back to /profile-info`,
+          );
+          navigate('/profile-info');
+        }
+      }
     } catch (err) {
       const message =
         err && err.message ? err.message : FALLBACK_ERROR;
